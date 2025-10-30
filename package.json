@@ -1,6 +1,11 @@
 {
-  "name": "ViveFleet",
+  "name": "vivefleet",
   "private": true,
+  "version": "0.0.1",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
