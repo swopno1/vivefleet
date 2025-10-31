@@ -1,6 +1,6 @@
 {
-  "name": "@vivefleet/typescript-config",
-  "version": "0.0.1",
+  "name": "@repo/typescript-config",
+  "version": "0.0.0",
   "private": true,
   "license": "MIT",
   "publishConfig": {
