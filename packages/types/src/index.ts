@@ -1,5 +1,4 @@
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+export * from "./vehicle";
+export * from "./driver";
+export * from "./position";
+export * from "./user";

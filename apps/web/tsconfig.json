@@ -5,7 +5,10 @@
     "incremental": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@repo/types": ["../../packages/types/src"],
+      "@repo/utils": ["../../packages/utils/src"],
+      "@repo/config": ["../../packages/config"]
     },
     "plugins": [{ "name": "next" }]
   },
