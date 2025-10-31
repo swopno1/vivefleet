@@ -1,7 +1,7 @@
 "use client";
 
+import { useVehicles } from "@/hooks/useVehicles";
 import FleetMap from "../components/FleetMap";
-import { useVehicles } from "../hooks/useVehicles";
 
 export default function Dashboard() {
   const vehicles = useVehicles();
