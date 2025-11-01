@@ -7,4 +7,5 @@ export interface Vehicle {
   speed: number;
   status?: "idle" | "moving" | "offline";
   assignedDriverId?: string;
+  timestamp?: string;
 }

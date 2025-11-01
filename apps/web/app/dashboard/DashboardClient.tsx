@@ -17,7 +17,9 @@ export default function DashboardClient() {
           <VehicleCard key={v.id} vehicle={v} />
         ))}
       </div>
+
       <DashboardMap vehicles={data} />
+
       <VehicleList vehicles={data} />
     </div>
   );

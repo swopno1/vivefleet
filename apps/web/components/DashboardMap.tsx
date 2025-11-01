@@ -1,70 +1,49 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import maplibregl, { Map } from "maplibre-gl";
+import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import type { Vehicle } from "@repo/types";
+import { Vehicle } from "@repo/types";
 
-interface DashboardMapProps {
-  vehicles: Vehicle[];
-}
-
-export default function DashboardMap({ vehicles }: DashboardMapProps) {
+export default function DashboardMap({ vehicles }: { vehicles: Vehicle[] }) {
   const mapContainer = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<Map | null>(null);
-  const markersRef = useRef<Record<string, maplibregl.Marker>>({});
+  const mapRef = useRef<maplibregl.Map | null>(null);
+  const markersRef = useRef<Map<string, maplibregl.Marker>>(new Map());
 
+  // Initialize map
   useEffect(() => {
-    if (!mapContainer.current || mapRef.current) return;
+    if (mapRef.current || !mapContainer.current) return;
 
     const map = new maplibregl.Map({
       container: mapContainer.current,
       style: "https://demotiles.maplibre.org/style.json",
-      center: [90.4125, 23.8103],
-      zoom: 12,
+      center: [116.4074, 39.9042], // Beijing
+      zoom: 10,
     });
 
     mapRef.current = map;
-
-    return () => map.remove();
   }, []);
 
-  // Update markers when vehicle list changes
+  // Update vehicle markers
   useEffect(() => {
     if (!mapRef.current) return;
 
     vehicles.forEach((v) => {
-      const existing = markersRef.current[v.id];
-      const el = document.createElement("div");
-      el.className = `rounded-full ${
-        v.status === "moving"
-          ? "bg-green-500"
-          : v.status === "idle"
-            ? "bg-yellow-500"
-            : "bg-gray-400"
-      } w-3 h-3 border border-white`;
+      const existing = markersRef.current.get(v.id);
 
       if (existing) {
         existing.setLngLat([v.lng, v.lat]);
       } else {
-        const marker = new maplibregl.Marker(el)
+        const marker = new maplibregl.Marker({ color: "#00BFFF" })
           .setLngLat([v.lng, v.lat])
-          .setPopup(
-            new maplibregl.Popup({ offset: 25 }).setHTML(
-              `<strong>${v.name}</strong><br>${v.plate_no}<br>${v.speed} km/h`
-            )
-          )
+          .setPopup(new maplibregl.Popup().setText(`Vehicle ${v.id}`))
           .addTo(mapRef.current!);
-
-        markersRef.current[v.id] = marker;
+        markersRef.current.set(v.id, marker);
       }
     });
   }, [vehicles]);
 
   return (
-    <div
-      ref={mapContainer}
-      className="w-full h-[500px] rounded-xl border border-border shadow-sm"
-    />
+    <div ref={mapContainer} className="w-full h-[70vh] rounded-lg shadow-md" />
   );
 }

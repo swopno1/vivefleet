@@ -1,26 +1,32 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
-import { env } from "@repo/config/env";
-import { vehicles as demoVehicles } from "@repo/utils";
+import { useQuery } from "@tanstack/react-query";
+
+interface Vehicle {
+  id: string;
+  coords: { lat: number; lon: number };
+  timestamp: string;
+}
 
 export function useVehicles() {
-  const [vehicles, setVehicles] = useState<any[]>([]);
+  const { data } = useQuery<Vehicle[]>({
+    queryKey: ["vehicleLocations"],
+    queryFn: async () => {
+      const res = await fetch("/api/location-update");
+      if (!res.ok) throw new Error("Failed to fetch vehicles");
+      return res.json();
+    },
+    refetchInterval: 5000, // poll every 5s
+  });
 
-  useEffect(() => {
-    const socket = io(env.NEXT_PUBLIC_SOCKET_URL);
-    setVehicles(demoVehicles); // set once
-
-    socket.on("position_update", (data) => {
-      setVehicles((prev) => {
-        const filtered = prev.filter((v) => v.id !== data.id);
-        return [...filtered, data]; // replace existing one
-      });
-    });
-
-    return () => socket.disconnect();
-  }, []);
-
-  return vehicles;
+  // Normalize result to ensure consistent shape
+  return (
+    data?.map((v) => ({
+      id: v.id,
+      name: v.id,
+      lat: v.coords.lat,
+      lon: v.coords.lon,
+      timestamp: v.timestamp,
+    })) || []
+  );
 }

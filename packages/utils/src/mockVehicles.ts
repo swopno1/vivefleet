@@ -29,6 +29,7 @@ export const vehicles: Vehicle[] = [
     lng: 90.4125,
     speed: 45,
     status: "moving",
+    assignedDriverId: "d3",
   },
   {
     id: "v4",
@@ -38,6 +39,7 @@ export const vehicles: Vehicle[] = [
     lng: 90.42,
     speed: 30,
     status: "idle",
+    assignedDriverId: "d4",
   },
   {
     id: "v5",
@@ -47,5 +49,6 @@ export const vehicles: Vehicle[] = [
     lng: 90.43,
     speed: 0,
     status: "offline",
+    assignedDriverId: "d5",
   },
 ];

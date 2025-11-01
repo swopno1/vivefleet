@@ -8,6 +8,7 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "@repo/types": "workspace:*"
+    "@repo/types": "workspace:*",
+    "@tanstack/react-query": "^5.62.0"
   }
 }

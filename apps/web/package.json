@@ -55,6 +55,7 @@
     "@repo/types": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@repo/utils": "workspace:*",
+    "@tanstack/react-query-devtools": "^5.90.2",
     "@types/maplibre-gl": "^1.14.0",
     "@types/node": "^22.15.3",
     "@types/react": "19.1.0",
