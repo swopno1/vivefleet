@@ -5,3 +5,13 @@ export interface PositionUpdate {
   speed?: number;
   timestamp: number;
 }
+
+export interface BeidouCoord {
+  lat: number;
+  lon: number;
+}
+
+export interface WGS84Coord {
+  lat: number;
+  lon: number;
+}
