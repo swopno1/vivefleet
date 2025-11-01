@@ -1,4 +1,4 @@
-import "@/app/globals.css";
+import "../../app/globals.css";
 
 export default function PWALayout({ children }: { children: React.ReactNode }) {
   return (

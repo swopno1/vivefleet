@@ -1,7 +1,7 @@
 "use client";
 
-import FleetMap from "@/components/FleetMap";
-import { useVehicles } from "@/hooks/useVehicles";
+import FleetMap from "../../components/FleetMap";
+import { useVehicles } from "../../hooks/useVehicles";
 
 export default function DriverPage() {
   const vehicles = useVehicles();

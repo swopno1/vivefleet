@@ -1,7 +1,16 @@
 // apps/web/app/api/location-update/route.ts
 import { NextResponse } from "next/server";
 
-let lastLocations: any[] = []; // in-memory store (MVP only)
+interface Location {
+  vehicleId: string;
+  coords: {
+    lat: number;
+    lng: number;
+  };
+  timestamp: string;
+}
+
+const lastLocations: Location[] = []; // in-memory store (MVP only)
 
 export async function POST(req: Request) {
   const body = await req.json();

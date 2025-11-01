@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import type { Vehicle } from "@repo/types";
 
 export default function VehicleCard({ vehicle }: { vehicle: Vehicle }) {

@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { beidouToWGS84, generateMockBeidouCoord } from "@repo/utils";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 
 export default function TripPage() {
   const [isSharing, setIsSharing] = useState(false);

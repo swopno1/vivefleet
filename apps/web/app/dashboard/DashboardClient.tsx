@@ -1,9 +1,9 @@
 "use client";
 
-import DashboardMap from "@/components/DashboardMap";
-import VehicleList from "@/components/VehicleList";
-import VehicleCard from "@/components/VehicleCard";
-import { useVehicles } from "@/hooks/useVehicles";
+import DashboardMap from "../../components/DashboardMap";
+import VehicleList from "../../components/VehicleList";
+import VehicleCard from "../../components/VehicleCard";
+import { useVehicles } from "../../hooks/useVehicles";
 import { vehicles as demoVehicles } from "@repo/utils";
 
 export default function DashboardClient() {

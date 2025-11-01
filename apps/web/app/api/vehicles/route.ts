@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     if (index !== -1) {
       // Filter out undefined properties
       const filteredBody = Object.fromEntries(
-        Object.entries(body).filter(([_, value]) => value !== undefined)
+        Object.entries(body).filter(([, value]) => value !== undefined)
       ) as Partial<Vehicle>;
 
       // Merge safely
