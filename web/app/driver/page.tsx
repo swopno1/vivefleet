@@ -1,5 +1,7 @@
-const VehiclesPage = () => {
-  return <div>VehiclesPage</div>;
-};
-
-export default VehiclesPage;
+export default function DriverPage() {
+  return (
+    <div>
+      <h1>Driver Page</h1>
+    </div>
+  );
+}
