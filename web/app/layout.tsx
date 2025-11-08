@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "./ThemeProvider";
 import "./globals.css";
 import QueryProvider from "./QueryProvider";
 
@@ -32,8 +33,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryProvider>
-          {/* Potentially other providers like ThemeProvider */}
-          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          </ThemeProvider>
         </QueryProvider>
       </body>
     </html>
