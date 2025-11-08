@@ -15,11 +15,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import type { Viewport } from "next";
+
 export const metadata: Metadata = {
   title: "ViveFleet",
   description: "ViveFleet PWA",
   manifest: "/manifest.json", // Link to your manifest file
-  themeColor: "#ffffff", // Your theme color
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -28,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
