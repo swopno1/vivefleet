@@ -1,42 +1,43 @@
-import type { Metadata } from "next";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages, unstable_setRequestLocale } from "next-intl/server";
-import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "../ThemeProvider";
-import "../globals.css";
-import QueryProvider from "../QueryProvider";
+import type { Metadata } from 'next'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages, setRequestLocale } from 'next-intl/server'
+import { Geist, Geist_Mono } from 'next/font/google'
+import { ThemeProvider } from '../ThemeProvider'
+import '../globals.css'
+import QueryProvider from '../QueryProvider'
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+})
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
 
-import type { Viewport } from "next";
+import type { Viewport } from 'next'
 
 export const metadata: Metadata = {
-  title: "ViveFleet",
-  description: "ViveFleet PWA",
-  manifest: "/manifest.json", // Link to your manifest file
-};
+  title: 'ViveFleet',
+  description: 'ViveFleet PWA',
+  manifest: '/manifest.json', // Link to your manifest file
+}
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
-};
+  themeColor: '#ffffff',
+}
 
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: Readonly<{
-  children: React.ReactNode;
-  params: { locale: string };
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
 }>) {
-  unstable_setRequestLocale(locale);
-  const messages = await getMessages();
+  const { locale } = await params
+  setRequestLocale(locale)
+  const messages = await getMessages()
 
   return (
     <html lang={locale} suppressHydrationWarning={true}>
@@ -57,5 +58,5 @@ export default async function RootLayout({
         </QueryProvider>
       </body>
     </html>
-  );
+  )
 }
