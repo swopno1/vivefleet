@@ -12,7 +12,14 @@ export default function FleetDashboardPage() {
       <h1 className="text-2xl font-bold">Fleet Dashboard</h1>
       <div className="grid flex-1 grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="col-span-1 lg:col-span-2">
-          <Map vehicles={vehicles} />
+          <Map
+            initialViewState={{
+              longitude: 90.389,
+              latitude: 23.811,
+              zoom: 12,
+            }}
+            markers={vehicles}
+          />
         </div>
         <div className="col-span-1">
           <VehicleTable vehicles={vehicles} />
