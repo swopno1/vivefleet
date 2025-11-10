@@ -8,12 +8,15 @@ import {
   getUnsyncedPositions,
   markPositionsAsSynced,
 } from '@/lib/db'
+import { useSocket } from '@/lib/socket';
 
 const TripPage = () => {
   const [isTripStarted, setIsTripStarted] = useState(false)
   const [currentPosition, setCurrentPosition] = useState({ lat: 0, lng: 0 })
   const tripIdRef = useRef<number | null>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const { socket, isConnected } = useSocket();
+  const driverId = 'driver-1'; // Mock driver ID for now
 
   const handleStartTrip = async () => {
     setIsTripStarted(true)
@@ -32,6 +35,16 @@ const TripPage = () => {
           ...newPosition,
           timestamp: new Date(),
         })
+      }
+
+      // Emit position update if connected
+      if (isConnected) {
+        socket.emit('position_update', {
+          driverId,
+          position: newPosition,
+          tripId: tripIdRef.current,
+        });
+        console.log('Emitted position update:', newPosition);
       }
     }, 5000)
   }
@@ -91,6 +104,7 @@ const TripPage = () => {
   return (
     <div>
       <h1>Trip Page</h1>
+      <p>Socket Status: {isConnected ? 'Connected' : 'Disconnected'}</p>
       <div style={{ display: 'flex', gap: '1rem' }}>
         <button
           onClick={handleStartTrip}

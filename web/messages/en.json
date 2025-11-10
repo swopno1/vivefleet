@@ -4,5 +4,11 @@
   },
   "AdminPage": {
     "title": "Admin Dashboard"
+  },
+  "DemoMap": {
+    "liveVehicles": "Live Vehicles",
+    "vehicles": "Vehicles",
+    "speed": "Speed",
+    "lastSeen": "Last Seen"
   }
 }
