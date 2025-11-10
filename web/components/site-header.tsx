@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { SidebarTrigger } from "@/components/ui/sidebar"
-import { LanguageSwitcher } from "@/components/language-switcher"
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import { SidebarTrigger } from '@/components/ui/sidebar'
+import { LanguageSwitcher } from '@/components/language-switcher'
 
 export function SiteHeader() {
   return (

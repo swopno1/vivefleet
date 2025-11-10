@@ -1,5 +1,8 @@
 {
   "HomePage": {
     "title": "به ViveFleet خوش آمدید!"
+  },
+  "AdminPage": {
+    "title": "Admin Dashboard"
   }
 }
