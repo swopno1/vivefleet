@@ -21,11 +21,16 @@ import type { Viewport } from 'next'
 export const metadata: Metadata = {
   title: 'ViveFleet',
   description: 'ViveFleet PWA',
-  manifest: '/manifest.json', // Link to your manifest file
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'ViveFleet',
+  },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff',
+  themeColor: '#000000',
 }
 
 export default async function RootLayout({
