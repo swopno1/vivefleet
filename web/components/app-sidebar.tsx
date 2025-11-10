@@ -42,28 +42,33 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "/dashboard",
+      url: "/fleet",
       icon: IconDashboard,
     },
     {
-      title: "Drivers",
-      url: "/dashboard/drivers",
-      icon: IconSteeringWheel,
-    },
-    {
       title: "Vehicles",
-      url: "/dashboard/vehicles",
+      url: "/vehicles",
       icon: IconCar,
     },
     {
-      title: "Routes",
-      url: "/dashboard/routes",
+      title: "Trips/routes",
+      url: "/routes",
       icon: IconMapRoute,
     },
     {
+      title: "Settings",
+      url: "/settings",
+      icon: IconSettings,
+    },
+    {
       title: "Alerts",
-      url: "/dashboard/alerts",
+      url: "/alerts",
       icon: IconAlertCircle,
+    },
+    {
+      title: "Drivers",
+      url: "/drivers",
+      icon: IconSteeringWheel,
     },
   ],
   navClouds: [
@@ -115,11 +120,6 @@ const data = {
     },
   ],
   navSecondary: [
-    {
-      title: "Settings",
-      url: "/dashboard/settings",
-      icon: IconSettings,
-    },
     {
       title: "Get Help",
       url: "#",
