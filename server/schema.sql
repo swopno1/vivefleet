@@ -26,6 +26,10 @@ COMMENT ON COLUMN public.messages.to_user_id IS 'The UUID of the user who receiv
 COMMENT ON COLUMN public.messages.content IS 'The text content of the message.';
 COMMENT ON COLUMN public.messages.status IS 'The delivery status of the message (pending, delivered, or read).';
 
+-- Create indexes for faster queries on user IDs.
+CREATE INDEX idx_messages_from_user_id ON public.messages(from_user_id);
+CREATE INDEX idx_messages_to_user_id ON public.messages(to_user_id);
+
 -- Enable Row Level Security (RLS) on the messages table.
 ALTER TABLE public.messages ENABLE ROW LEVEL SECURITY;
 
