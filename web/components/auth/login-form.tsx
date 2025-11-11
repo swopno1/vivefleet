@@ -31,9 +31,11 @@ export function LoginForm() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const { error } = await loginUser(values)
+    const { error } = await loginUser(values);
     if (error) {
-      console.error(error)
+      console.error(error);
+    } else {
+      window.location.href = "/en/fleet";
     }
   }
 

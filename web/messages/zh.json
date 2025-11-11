@@ -3,6 +3,12 @@
     "title": "欢迎来到 ViveFleet！"
   },
   "AdminPage": {
-    "title": "Admin Dashboard"
+    "title": "管理员仪表板"
+  },
+  "DemoMap": {
+    "liveVehicles": "实时车辆",
+    "vehicles": "车辆",
+    "speed": "速度",
+    "lastSeen": "最后上线"
   }
 }

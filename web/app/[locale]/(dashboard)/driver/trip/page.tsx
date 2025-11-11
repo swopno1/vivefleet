@@ -8,15 +8,36 @@ import {
   getUnsyncedPositions,
   markPositionsAsSynced,
 } from '@/lib/db'
-import { useSocket } from '@/lib/socket'
+import { socket } from '@/lib/socket'
 
 const TripPage = () => {
   const [isTripStarted, setIsTripStarted] = useState(false)
   const [currentPosition, setCurrentPosition] = useState({ lat: 0, lng: 0 })
+  const [isConnected, setIsConnected] = useState(socket.connected)
   const tripIdRef = useRef<number | null>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
-  const { socket, isConnected } = useSocket()
   const driverId = 'driver-1' // Mock driver ID for now
+
+  useEffect(() => {
+    socket.connect()
+
+    function onConnect() {
+      setIsConnected(true)
+    }
+
+    function onDisconnect() {
+      setIsConnected(false)
+    }
+
+    socket.on('connect', onConnect)
+    socket.on('disconnect', onDisconnect)
+
+    return () => {
+      socket.off('connect', onConnect)
+      socket.off('disconnect', onDisconnect)
+      socket.disconnect()
+    }
+  }, [])
 
   const handleStartTrip = async () => {
     setIsTripStarted(true)

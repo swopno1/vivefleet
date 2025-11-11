@@ -3,20 +3,41 @@
 import { ChartAreaInteractive } from '@/components/chart-area-interactive'
 import { DataTable } from '@/components/data-table'
 import { SectionCards } from '@/components/section-cards'
-import MapView from '@/components/map/MapView'
+import MapView from '@/components/map'
 import { useTranslations } from 'next-intl'
-import { useSocket } from '@/lib/socket'
+import { socket } from '@/lib/socket'
 import { useEffect, useState } from 'react'
 import { VehiclePos } from '@/lib/types'
 
 export default function DashboardClient() {
   const t = useTranslations('AdminPage')
-  const { socket, isConnected } = useSocket()
+  const [isConnected, setIsConnected] = useState(socket.connected)
   const [vehicleData, setVehicleData] = useState<VehiclePos[]>([])
 
   useEffect(() => {
+    socket.connect()
+
+    function onConnect() {
+      setIsConnected(true)
+    }
+
+    function onDisconnect() {
+      setIsConnected(false)
+    }
+
+    socket.on('connect', onConnect)
+    socket.on('disconnect', onDisconnect)
+
+    return () => {
+      socket.off('connect', onConnect)
+      socket.off('disconnect', onDisconnect)
+      socket.disconnect()
+    }
+  }, [])
+
+  useEffect(() => {
     if (isConnected) {
-      socket.on('position_update', (data: VehiclePos) => {
+      const handlePositionUpdate = (data: VehiclePos) => {
         setVehicleData((prevData) => {
           const existingVehicleIndex = prevData.findIndex(
             (v) => v.driverId === data.driverId
@@ -30,13 +51,14 @@ export default function DashboardClient() {
             return [...prevData, data]
           }
         })
-      })
-    }
+      }
+      socket.on('position_update', handlePositionUpdate)
 
-    return () => {
-      socket.off('position_update')
+      return () => {
+        socket.off('position_update', handlePositionUpdate)
+      }
     }
-  }, [isConnected, socket])
+  }, [isConnected])
 
   return (
     <>

@@ -1,6 +1,7 @@
 'use client'
 
 import { User } from '@/lib/types'
+import Cookies from 'js-cookie'
 import { useState } from 'react'
 
 export const useSession = () => {
@@ -22,8 +23,10 @@ export const useSession = () => {
     setToken(token)
     if (token) {
       localStorage.setItem('token', token)
+      Cookies.set('token', token)
     } else {
       localStorage.removeItem('token')
+      Cookies.remove('token')
     }
   }
 

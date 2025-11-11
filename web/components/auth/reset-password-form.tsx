@@ -41,7 +41,7 @@ export function ResetPasswordForm() {
         <FormField
           control={form.control}
           name="password"
-          render={({ field })_ => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>New Password</FormLabel>
               <FormControl>
