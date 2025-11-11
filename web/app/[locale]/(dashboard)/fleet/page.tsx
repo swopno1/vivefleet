@@ -26,10 +26,12 @@ export default function FleetDashboardPage() {
           <Map
             initialCenter={[90.389, 23.811]}
             initialZoom={12}
-            vehicles={vehicles?.map((v) => ({
-              driverId: v.id,
-              position: { lat: v.lat, lng: v.lng },
-            }))}
+            vehicles={
+              vehicles?.map((v) => ({
+                driverId: v.id,
+                position: { lat: v.lat, lng: v.lng },
+              })) || []
+            }
             focusOn={
               focusedVehicle
                 ? {

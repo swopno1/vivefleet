@@ -25,6 +25,7 @@ export default function DemoMap({
   initialCenter = [121.4737, 31.2304], // Shanghai as fallback [lng, lat]
   initialZoom = 8,
   vehicles = [],
+  focusOn,
 }: DemoMapProps) {
   const t = useTranslations ? useTranslations('DemoMap') : (k: string) => k
   const mapContainer = useRef<HTMLDivElement | null>(null)

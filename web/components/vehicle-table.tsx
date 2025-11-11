@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Vehicle } from "@/hooks/use-socket-vehicles";
+import { Vehicle } from "@/hooks/use-fleet-data";
 
 interface VehicleTableProps {
   vehicles: Vehicle[];

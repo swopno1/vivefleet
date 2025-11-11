@@ -13,4 +13,20 @@ export type VehiclePos = {
     lat: number
     lng: number
   }
+  tripId?: number
+}
+
+export interface Trip {
+  id?: number
+  startTime: Date
+  endTime?: Date
+}
+
+export interface Position {
+  id?: number
+  tripId: number
+  lat: number
+  lng: number
+  timestamp: Date
+  synced: boolean
 }
