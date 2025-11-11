@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socket.IO Chat Test</title>
+</head>
+<body>
+  <h1>Socket.IO Chat Test</h1>
+  <div>
+    <h2>User 1</h2>
+    <input id="token1" placeholder="User 1 JWT" />
+    <button id="connect1">Connect</button>
+    <button id="disconnect1" disabled>Disconnect</button>
+    <br />
+    <input id="toUserId1" placeholder="Recipient User ID" />
+    <input id="message1" placeholder="Message" />
+    <button id="send1" disabled>Send</button>
+    <ul id="messages1"></ul>
+  </div>
+  <div>
+    <h2>User 2</h2>
+    <input id="token2" placeholder="User 2 JWT" />
+    <button id="connect2">Connect</button>
+    <button id="disconnect2" disabled>Disconnect</button>
+    <br />
+    <input id="toUserId2" placeholder="Recipient User ID" />
+    <input id="message2" placeholder="Message" />
+    <button id="send2" disabled>Send</button>
+    <ul id="messages2"></ul>
+  </div>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script>
+    const connectUser = (userNum) => {
+      const token = document.getElementById(`token${userNum}`).value;
+      const socket = io('http://localhost:4000', {
+        auth: { token },
+      });
+
+      socket.on('connect', () => {
+        console.log(`User ${userNum} connected`);
+        document.getElementById(`connect${userNum}`).disabled = true;
+        document.getElementById(`disconnect${userNum}`).disabled = false;
+        document.getElementById(`send${userNum}`).disabled = false;
+      });
+
+      socket.on('disconnect', () => {
+        console.log(`User ${userNum} disconnected`);
+        document.getElementById(`connect${userNum}`).disabled = false;
+        document.getElementById(`disconnect${userNum}`).disabled = true;
+        document.getElementById(`send${userNum}`).disabled = true;
+      });
+
+      socket.on('user:online', (data) => {
+        console.log(`User ${data.userId} is online`);
+      });
+
+      socket.on('user:offline', (data) => {
+        console.log(`User ${data.userId} is offline`);
+      });
+
+      socket.on('message:send', (data) => {
+        const item = document.createElement('li');
+        item.textContent = `From: ${data.from_user_id} - ${data.content}`;
+        document.getElementById(`messages${userNum}`).appendChild(item);
+        socket.emit('message:delivered', data.id);
+      });
+
+      document.getElementById(`send${userNum}`).onclick = () => {
+        const toUserId = document.getElementById(`toUserId${userNum}`).value;
+        const content = document.getElementById(`message${userNum}`).value;
+        socket.emit('message:send', {
+          toUserId,
+          content,
+          timestamp: new Date().toISOString(),
+        });
+      };
+
+      document.getElementById(`disconnect${userNum}`).onclick = () => {
+        socket.disconnect();
+      };
+    };
+
+    document.getElementById('connect1').onclick = () => connectUser(1);
+    document.getElementById('connect2').onclick = () => connectUser(2);
+  </script>
+</body>
+</html>
