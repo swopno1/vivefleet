@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
 import {
@@ -8,15 +8,15 @@ import {
   getUnsyncedPositions,
   markPositionsAsSynced,
 } from '@/lib/db'
-import { useSocket } from '@/lib/socket';
+import { useSocket } from '@/lib/socket'
 
 const TripPage = () => {
   const [isTripStarted, setIsTripStarted] = useState(false)
   const [currentPosition, setCurrentPosition] = useState({ lat: 0, lng: 0 })
   const tripIdRef = useRef<number | null>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
-  const { socket, isConnected } = useSocket();
-  const driverId = 'driver-1'; // Mock driver ID for now
+  const { socket, isConnected } = useSocket()
+  const driverId = 'driver-1' // Mock driver ID for now
 
   const handleStartTrip = async () => {
     setIsTripStarted(true)
@@ -43,8 +43,8 @@ const TripPage = () => {
           driverId,
           position: newPosition,
           tripId: tripIdRef.current,
-        });
-        console.log('Emitted position update:', newPosition);
+        })
+        console.log('Emitted position update:', newPosition)
       }
     }, 5000)
   }
@@ -73,7 +73,11 @@ const TripPage = () => {
             body: JSON.stringify(unsynced),
           })
           if (response.ok) {
-            const positionIds = unsynced.map((p) => p.id)
+            // const positionIds = unsynced.map((p) => p.id)
+            const positionIds = unsynced
+              .map((p) => p.id)
+              .filter((id): id is number => id !== undefined)
+
             await markPositionsAsSynced(positionIds)
           } else {
             console.error('Failed to sync positions:', response.statusText)

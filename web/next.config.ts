@@ -1,17 +1,13 @@
 import { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
-import withPWA from 'next-pwa'
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
 }
 
 const withNextIntl = createNextIntlPlugin()
 
-const pwaConfig = {
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-}
-
-export default withPWA(pwaConfig)(withNextIntl(nextConfig))
+export default withNextIntl(nextConfig)

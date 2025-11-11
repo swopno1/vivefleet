@@ -7,7 +7,7 @@ import MapView from '@/components/map/MapView'
 import { useTranslations } from 'next-intl'
 import { useSocket } from '@/lib/socket'
 import { useEffect, useState } from 'react'
-import { VehiclePos } from '@/lib/type'
+import { VehiclePos } from '@/lib/types'
 
 export default function DashboardClient() {
   const t = useTranslations('AdminPage')
@@ -20,23 +20,23 @@ export default function DashboardClient() {
         setVehicleData((prevData) => {
           const existingVehicleIndex = prevData.findIndex(
             (v) => v.driverId === data.driverId
-          );
+          )
 
           if (existingVehicleIndex !== -1) {
-            const updatedData = [...prevData];
-            updatedData[existingVehicleIndex] = data;
-            return updatedData;
+            const updatedData = [...prevData]
+            updatedData[existingVehicleIndex] = data
+            return updatedData
           } else {
-            return [...prevData, data];
+            return [...prevData, data]
           }
-        });
-      });
+        })
+      })
     }
 
     return () => {
-      socket.off('position_update');
-    };
-  }, [isConnected, socket]);
+      socket.off('position_update')
+    }
+  }, [isConnected, socket])
 
   return (
     <>
@@ -46,7 +46,7 @@ export default function DashboardClient() {
       </div>
 
       <div className="px-4 lg:px-6 mt-4">
-        <MapView vehicles={vehicleData}/>
+        <MapView vehicles={vehicleData} />
       </div>
 
       <SectionCards />
