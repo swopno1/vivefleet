@@ -1,5 +1,10 @@
 import { supabase } from '../lib/supabase.js';
 
+/**
+ * Registers a new user.
+ * @param {import('express').Request} req - The request object.
+ * @param {import('express').Response} res - The response object.
+ */
 const register = async (req, res) => {
   const { email, password, username } = req.body;
 
@@ -38,6 +43,11 @@ const register = async (req, res) => {
   }
 };
 
+/**
+ * Logs in an existing user.
+ * @param {import('express').Request} req - The request object.
+ * @param {import('express').Response} res - The response object.
+ */
 const login = async (req, res) => {
   const { email, password } = req.body;
 

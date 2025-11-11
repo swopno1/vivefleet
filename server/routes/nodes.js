@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { getMessageHistory } from '../controllers/messages.js';
+import { ping, getNodes } from '../controllers/nodes.js';
 import { authenticateUser } from '../middleware/auth.js';
 
 const router = Router();
 
-router.get('/history/:userId', authenticateUser, getMessageHistory);
+router.post('/ping', ping);
+router.get('/admin/nodes', authenticateUser, getNodes);
 
 export default router;
