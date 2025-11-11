@@ -1,2 +1,9 @@
-node_modules
-.env
+# Root
+/node_modules
+
+# Backend
+/server/node_modules
+/server/.env
+
+# General
+.DS_Store

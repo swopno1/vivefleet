@@ -36,7 +36,7 @@ const PORT = process.env.PORT || 4000;
 
 import routes from './routes/index.js';
 
-app.use('/api', routes);
+app.use(routes);
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
