@@ -21,7 +21,8 @@ app.use((req, res, next) => {
   next();
 });
 
-import initializeSocket from './sockets/index.js';
+import initializeSocket, { activeUsers } from './sockets/index.js';
+import retryMessageDelivery from './lib/retry.js';
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -31,6 +32,7 @@ const io = new Server(server, {
 });
 
 initializeSocket(io);
+retryMessageDelivery(io, activeUsers);
 
 const PORT = process.env.PORT || 4000;
 
