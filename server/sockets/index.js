@@ -3,6 +3,8 @@ import { supabase } from '../lib/supabase.js';
 
 const activeUsers = new Map();
 
+export { activeUsers };
+
 const initializeSocket = (io) => {
   io.use(socketAuth);
 
@@ -12,20 +14,32 @@ const initializeSocket = (io) => {
     socket.broadcast.emit('user:online', { userId });
 
     // Deliver queued messages
+    console.log(`User ${userId} connected, checking for offline messages.`);
     const { data: messages, error } = await supabase
       .from('messages')
       .select('*')
       .eq('to_user_id', userId)
       .eq('status', 'pending');
 
-    if (messages) {
-      messages.forEach(async (message) => {
-        socket.emit('message:send', message);
-        await supabase
-          .from('messages')
-          .update({ status: 'delivered' })
-          .eq('id', message.id);
-      });
+    if (error) {
+      console.error('Error fetching offline messages:', error);
+    }
+
+    if (messages && messages.length > 0) {
+      console.log(`Found ${messages.length} offline messages for user ${userId}.`);
+      socket.emit('message:sync', messages);
+      const messageIds = messages.map((m) => m.id);
+      const { error: updateError } = await supabase
+        .from('messages')
+        .update({ status: 'delivered' })
+        .in('id', messageIds);
+      if (updateError) {
+        console.error('Error marking messages as delivered:', updateError);
+      } else {
+        console.log(`Successfully marked ${messages.length} messages as delivered for user ${userId}.`);
+      }
+    } else {
+      console.log(`No offline messages found for user ${userId}.`);
     }
 
 
