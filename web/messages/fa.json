@@ -3,6 +3,12 @@
     "title": "به ViveFleet خوش آمدید!"
   },
   "AdminPage": {
-    "title": "Admin Dashboard"
+    "title": "داشبورد مدیریت"
+  },
+  "DemoMap": {
+    "liveVehicles": "وسایل نقلیه زنده",
+    "vehicles": "وسایل نقلیه",
+    "speed": "سرعت",
+    "lastSeen": "آخرین بازدید"
   }
 }

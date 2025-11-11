@@ -6,3 +6,11 @@ export interface User {
   publicKey: string
   createdAt: Date
 }
+
+export type VehiclePos = {
+  driverId: string
+  position: {
+    lat: number
+    lng: number
+  }
+}
