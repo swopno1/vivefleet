@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { AuthProvider } from '@/contexts/AuthContext'
 import { ThemeProvider } from '../ThemeProvider'
 import '../globals.css'
 import QueryProvider from '../QueryProvider'
@@ -49,10 +50,11 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
+        <AuthProvider>
+          <QueryProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
@@ -61,7 +63,8 @@ export default async function RootLayout({
             </NextIntlClientProvider>
           </ThemeProvider>
         </QueryProvider>
-      </body>
-    </html>
+      </AuthProvider>
+    </body>
+  </html>
   )
 }

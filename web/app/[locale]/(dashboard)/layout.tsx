@@ -1,12 +1,11 @@
+'use client'
+
 import { AppSidebar } from '@/components/app-sidebar'
 import { SiteHeader } from '@/components/site-header'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import withAuth from '@/hocs/withAuth'
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider
       style={
@@ -31,3 +30,5 @@ export default function DashboardLayout({
     </SidebarProvider>
   )
 }
+
+export default withAuth(DashboardLayout)
