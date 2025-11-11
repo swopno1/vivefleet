@@ -1,14 +1,34 @@
 {
-  "HomePage": {
-    "title": "欢迎来到 ViveFleet！"
+  "LoginPage": {
+    "title": "登录",
+    "description": "输入您的凭据以访问您的帐户。",
+    "emailLabel": "电子邮件",
+    "emailPlaceholder": "输入您的电子邮件",
+    "passwordLabel": "密码",
+    "passwordPlaceholder": "输入您的密码",
+    "submitButton": "登录"
   },
-  "AdminPage": {
-    "title": "管理员仪表板"
+  "RegisterPage": {
+    "title": "注册",
+    "description": "创建您的帐户以开始。",
+    "nameLabel": "姓名",
+    "namePlaceholder": "输入您的姓名",
+    "emailLabel": "电子邮件",
+    "emailPlaceholder": "输入您的电子邮件",
+    "passwordLabel": "密码",
+    "passwordPlaceholder": "输入您的密码",
+    "roleLabel": "角色",
+    "rolePlaceholder": "选择一个角色",
+    "driverOption": "司机",
+    "adminOption": "管理员",
+    "submitButton": "注册"
+  },
+  "DashboardPage": {
+    "title": "实时车队仪表板"
   },
   "DemoMap": {
     "liveVehicles": "实时车辆",
     "vehicles": "车辆",
-    "speed": "速度",
-    "lastSeen": "最后上线"
+    "lastSeen": "最后一次看到"
   }
 }

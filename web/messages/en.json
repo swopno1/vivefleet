@@ -1,14 +1,34 @@
 {
-  "HomePage": {
-    "title": "Welcome to ViveFleet!"
+  "LoginPage": {
+    "title": "Login",
+    "description": "Enter your credentials to access your account.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "submitButton": "Login"
   },
-  "AdminPage": {
-    "title": "Admin Dashboard"
+  "RegisterPage": {
+    "title": "Register",
+    "description": "Create your account to get started.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Enter your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "roleLabel": "Role",
+    "rolePlaceholder": "Select a role",
+    "driverOption": "Driver",
+    "adminOption": "Admin",
+    "submitButton": "Register"
+  },
+  "DashboardPage": {
+    "title": "Live Fleet Dashboard"
   },
   "DemoMap": {
     "liveVehicles": "Live Vehicles",
-    "vehicles": "Vehicles",
-    "speed": "Speed",
+    "vehicles": "vehicles",
     "lastSeen": "Last Seen"
   }
 }

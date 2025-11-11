@@ -6,6 +6,8 @@ import { AuthProvider } from '@/contexts/AuthContext'
 import { ThemeProvider } from '../ThemeProvider'
 import '../globals.css'
 import QueryProvider from '../QueryProvider'
+import PwaProvider from './PwaProvider'
+import { SiteHeader } from '@/components/site-header'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -58,9 +60,16 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <NextIntlClientProvider messages={messages}>
-              {children}
-            </NextIntlClientProvider>
+            <div className="relative flex min-h-screen flex-col">
+              <SiteHeader />
+              <div className="flex-1">
+                <PwaProvider>
+                  <NextIntlClientProvider messages={messages}>
+                    {children}
+                  </NextIntlClientProvider>
+                </PwaProvider>
+              </div>
+            </div>
           </ThemeProvider>
         </QueryProvider>
       </AuthProvider>
