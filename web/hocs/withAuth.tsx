@@ -14,9 +14,10 @@ const withAuth = <P extends object>(
 
     useEffect(() => {
       if (!loading && !token) {
-        router.replace(`/login?redirect=${pathname}`)
+        const locale = pathname.split('/')[1] || 'en';
+        router.replace(`/${locale}/(auth)/login`);
       }
-    }, [loading, token, router, pathname])
+    }, [loading, token, router, pathname]);
 
     if (loading) {
       return <div>Loading...</div>

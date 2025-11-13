@@ -19,9 +19,13 @@ export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl
 
   // 3️⃣ Protect /dashboard routes
-  if (pathname.startsWith('/dashboard') && !token) {
+  const protectedPaths = ['/admin', '/driver', '/fleet'];
+  const isProtected = protectedPaths.some(p => pathname.endsWith(p));
+
+  if (isProtected && !token) {
+    const locale = pathname.split('/')[1] || defaultLocale;
     const url = req.nextUrl.clone()
-    url.pathname = '/login'
+    url.pathname = `/${locale}/(auth)/login`
     return NextResponse.redirect(url)
   }
 

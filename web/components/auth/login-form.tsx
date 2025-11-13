@@ -1,9 +1,13 @@
 'use client'
 
 import { useAuth } from '@/contexts/AuthContext'
+import toast from 'react-hot-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useTranslations } from 'next-intl'
+import { useRouter, useParams } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from '../ui/button'
 import {
   Form,
@@ -21,7 +25,11 @@ const formSchema = z.object({
 })
 
 export function LoginForm() {
-  const { loginUser } = useAuth()
+  const { loginUser } = useAuth();
+  const t = useTranslations('LoginPage');
+  const router = useRouter();
+  const params = useParams();
+  const locale = params.locale;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,9 +41,9 @@ export function LoginForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { error } = await loginUser(values);
     if (error) {
-      console.error(error);
+      toast.error(t('auth.login_failed'));
     } else {
-      window.location.href = "/en/fleet";
+      router.push(`/${locale}/(dashboard)/fleet`);
     }
   }
 
@@ -69,6 +77,15 @@ export function LoginForm() {
           )}
         />
         <Button type="submit">Submit</Button>
+        <p className="text-center text-sm text-gray-500">
+          Don't have an account?{' '}
+          <Link
+            className="font-semibold text-gray-900 hover:underline dark:text-gray-50"
+            href={`/${locale}/(auth)/register`}
+          >
+            Register
+          </Link>
+        </p>
       </form>
     </Form>
   )

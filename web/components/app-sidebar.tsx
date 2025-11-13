@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useParams } from "next/navigation";
 import {
   IconAlertCircle,
   IconCamera,
@@ -41,34 +42,19 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "/fleet",
+      title: "Fleet",
+      url: "/(dashboard)/fleet",
       icon: IconDashboard,
     },
     {
-      title: "Vehicles",
-      url: "/vehicles",
-      icon: IconCar,
-    },
-    {
-      title: "Trips/routes",
-      url: "/routes",
-      icon: IconMapRoute,
-    },
-    {
-      title: "Settings",
-      url: "/settings",
-      icon: IconSettings,
-    },
-    {
-      title: "Alerts",
-      url: "/alerts",
-      icon: IconAlertCircle,
-    },
-    {
-      title: "Drivers",
-      url: "/drivers",
+      title: "Driver",
+      url: "/(dashboard)/driver",
       icon: IconSteeringWheel,
+    },
+    {
+      title: "Admin",
+      url: "/(dashboard)/admin",
+      icon: IconSettings,
     },
   ],
   navClouds: [
@@ -151,6 +137,27 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const params = useParams();
+  const locale = params.locale;
+
+  const navMain = [
+    {
+      title: "Fleet",
+      url: `/${locale}/(dashboard)/fleet`,
+      icon: IconDashboard,
+    },
+    {
+      title: "Driver",
+      url: `/${locale}/(dashboard)/driver`,
+      icon: IconSteeringWheel,
+    },
+    {
+      title: "Admin",
+      url: `/${locale}/(dashboard)/admin`,
+      icon: IconSettings,
+    },
+  ];
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -169,7 +176,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={navMain} />
         <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>

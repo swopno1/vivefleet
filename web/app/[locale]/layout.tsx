@@ -8,6 +8,7 @@ import '../globals.css'
 import QueryProvider from '../QueryProvider'
 import PwaProvider from './PwaProvider'
 import { SiteHeader } from '@/components/site-header'
+import { SidebarProvider } from '@/components/ui/sidebar'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -60,16 +61,18 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="flex-1">
-                <PwaProvider>
-                  <NextIntlClientProvider messages={messages}>
-                    {children}
-                  </NextIntlClientProvider>
-                </PwaProvider>
-              </div>
-            </div>
+            <NextIntlClientProvider messages={messages}>
+              <SidebarProvider>
+                <div className="relative flex min-h-screen flex-col">
+                  <SiteHeader />
+                  <div className="flex-1">
+                    <PwaProvider>
+                      {children}
+                    </PwaProvider>
+                  </div>
+                </div>
+              </SidebarProvider>
+            </NextIntlClientProvider>
           </ThemeProvider>
         </QueryProvider>
       </AuthProvider>

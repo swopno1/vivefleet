@@ -3,6 +3,7 @@
 import { User } from '@/lib/types'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useSession } from '../hooks/useSession'
+import { useParams } from 'next/navigation'
 
 interface AuthContextType {
   user: User | null
@@ -41,6 +42,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { token, setToken, user, setUser } = useSession()
   const [loading, setLoading] = useState(true)
+  const params = useParams()
+  const locale = params.locale
 
   useEffect(() => {
     if (token && user) {
@@ -77,6 +80,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return { error: data, success: false }
       }
       login(data.token, data.user)
+      localStorage.setItem('role', data.user.role)
+      localStorage.setItem('locale', locale)
       return { error: null, success: true }
     } catch (error) {
       return { error, success: false }
