@@ -1,9 +1,12 @@
 'use client'
 
 import { useAuth } from '@/contexts/AuthContext'
+import toast from 'react-hot-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useTranslations } from 'next-intl'
+import { useRouter, useParams } from 'next/navigation'
 import { Button } from '../ui/button'
 import {
   Form,
@@ -30,7 +33,11 @@ const formSchema = z.object({
 })
 
 export function RegisterForm() {
-  const { registerUser } = useAuth()
+  const { registerUser } = useAuth();
+  const t = useTranslations('RegisterPage');
+  const router = useRouter();
+  const params = useParams();
+  const locale = params.locale;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,7 +51,10 @@ export function RegisterForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { error } = await registerUser(values)
     if (error) {
-      console.error(error)
+      toast.error(t('auth.register_failed'));
+    } else {
+      toast.success(t('auth.register_success'));
+      router.push(`/${locale}/(auth)/login`);
     }
   }
 

@@ -1,6 +1,6 @@
 import { use } from 'react'
 import { setRequestLocale } from 'next-intl/server'
-import Home from './Home'
+import { LandingPage } from '@/components/landing-page'
 
 export default function Page({
   params,
@@ -10,5 +10,5 @@ export default function Page({
   const { locale } = use(params)
   setRequestLocale(locale)
 
-  return <Home />
+  return <LandingPage />
 }

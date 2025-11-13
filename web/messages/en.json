@@ -30,5 +30,10 @@
     "liveVehicles": "Live Vehicles",
     "vehicles": "vehicles",
     "lastSeen": "Last Seen"
+  },
+  "auth": {
+    "login_failed": "Login failed. Please check your credentials.",
+    "register_failed": "Registration failed. Please try again.",
+    "register_success": "Registration successful! Please login."
   }
 }

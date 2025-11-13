@@ -30,5 +30,10 @@
     "liveVehicles": "实时车辆",
     "vehicles": "车辆",
     "lastSeen": "最后一次看到"
+  },
+  "auth": {
+    "login_failed": "登录失败。请检查您的凭据。",
+    "register_failed": "注册失败。请再试一次。",
+    "register_success": "注册成功！请登录。"
   }
 }
