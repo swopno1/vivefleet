@@ -1,14 +1,34 @@
 {
-  "HomePage": {
-    "title": "به ViveFleet خوش آمدید!"
+  "LoginPage": {
+    "title": "ورود",
+    "description": "برای دسترسی به حساب کاربری خود، اطلاعات خود را وارد کنید.",
+    "emailLabel": "ایمیل",
+    "emailPlaceholder": "ایمیل خود را وارد کنید",
+    "passwordLabel": "رمز عبور",
+    "passwordPlaceholder": "رمز عبور خود را وارد کنید",
+    "submitButton": "ورود"
   },
-  "AdminPage": {
-    "title": "داشبورد مدیریت"
+  "RegisterPage": {
+    "title": "ثبت نام",
+    "description": "برای شروع حساب کاربری خود را ایجاد کنید.",
+    "nameLabel": "نام",
+    "namePlaceholder": "نام خود را وارد کنید",
+    "emailLabel": "ایمیل",
+    "emailPlaceholder": "ایمیل خود را وارد کنید",
+    "passwordLabel": "رمز عبور",
+    "passwordPlaceholder": "رمز عبور خود را وارد کنید",
+    "roleLabel": "نقش",
+    "rolePlaceholder": "یک نقش را انتخاب کنید",
+    "driverOption": "راننده",
+    "adminOption": "مدیر",
+    "submitButton": "ثبت نام"
+  },
+  "DashboardPage": {
+    "title": "داشبورد ناوگان زنده"
   },
   "DemoMap": {
     "liveVehicles": "وسایل نقلیه زنده",
     "vehicles": "وسایل نقلیه",
-    "speed": "سرعت",
     "lastSeen": "آخرین بازدید"
   }
 }
